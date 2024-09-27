@@ -29,10 +29,7 @@ void loop() {
     Dessa forma, a criança deverá configurar a forma com que o carrinho vai se mover, na seguinte estrutura:
       meuCarrinho.motor_Esq(i);
       meuCarrinho.motor_Dir(i);
-    Sendo um i escolhida por ela e depois colocar um delay para determinar a duração do movimento, na seguinte estrutura:
-      delay(duracao); 
-    Essa duração é em milissegundos.
-  */
+   */
   if (SerialBT.available()) {
     comando = SerialBT.read();
   }

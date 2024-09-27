@@ -6,6 +6,9 @@
 #ifndef HoCarrinho_h
 #define HoCarrinho_h
 
+extern BluetoothSerial SerialBT;
+
+
 class Carrinho {
   public:
    uint8_t pin1;
@@ -29,5 +32,6 @@ class Carrinho {
   private:
    unsigned int read(uint8_t und = 0);
 };
+
 
 #endif

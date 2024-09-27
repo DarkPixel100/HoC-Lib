@@ -1,13 +1,13 @@
 #include "HoCarrinho.h"
 
+BluetoothSerial SerialBT;
+
 Carrinho::Carrinho(uint8_t p1, uint8_t p2, uint8_t p3, uint8_t p4) {
   pin1 = p1;
   pin2 = p2;
   pin3 = p3;
   pin4 = p4;
 }
-
-BluetoothSerial SerialBT;
 
 void Carrinho::setup() {
   Serial.begin(9600);
