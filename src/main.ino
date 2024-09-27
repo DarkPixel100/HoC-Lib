@@ -7,7 +7,7 @@
 #define pin4 19
 Carrinho meuCarrinho(pin1, pin2, pin3, pin4);
 //Será que dá pra deixar eles verem o hardware e definirem os pinos? ou complica muito? 
-//Se for complicar muito, a gente coloca na biblioteca, mas acho que seria legal
+//Se for complicar muito, a gente coloca na biblioteca, mas acho que seria legal deixar pra eles
 
 char comando;
 
@@ -23,10 +23,16 @@ void loop() {
     
     A direção dos motores é definida pela variável i.
     i = 1 significa que o motor é para frente.
+      pin[impar] HIGH
+      pin[par] LOW
     i = 0 significa que o motor é parado.
+      pin[impar] LOW
+      pin[par] LOW
     i = -1 significa que o motor é para trás.
+      pin[impar] LOW
+      pin[par] HIGH
 
-    Dessa forma, a criança deverá configurar a forma com que o carrinho vai se mover, na seguinte estrutura:
+    Dessa forma, a criança deverá configurar os possiveis movimentos que o carrinho pode fazer, na seguinte estrutura:
       meuCarrinho.motor_Esq(i);
       meuCarrinho.motor_Dir(i);
    */
@@ -38,7 +44,7 @@ void loop() {
   switch (comando) {
 
     case 'F':{// Frente reto
-      meuCarrinho.motor_Esq(1);
+      meuCarrinho.motor_Esq(1); 
       meuCarrinho.motor_Dir(1);
       break;
     }
