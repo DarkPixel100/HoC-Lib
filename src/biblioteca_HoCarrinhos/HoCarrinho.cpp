@@ -1,102 +1,69 @@
 #include "HoCarrinho.h"
 
-BluetoothSerial SerialBT;
+TaskHandle_t task_movimento;
+TaskHandle_t task_modulos;
+SemaphoreHandle_t xMutex;
+volatile bool sinal_entre_nucleos;
 
-Carrinho::Carrinho(uint8_t p1, uint8_t p2, uint8_t p3, uint8_t p4) {
-  pin1 = p1;
-  pin2 = p2;
-  pin3 = p3;
-  pin4 = p4;
+void inicializarSistema() {
+    Serial.begin(9600);
+    SerialBT.begin("Carrinho DualCore");
+
+    xMutex = xSemaphoreCreateMutex();
+
+    xTaskCreatePinnedToCore(Task1code, "task_movimento", 2048, NULL, 1, &task_movimento, 0);
+    delay(500);
+    xTaskCreatePinnedToCore(Task2code, "task_modulos", 2048, NULL, 1, &task_modulos, 1);
+    delay(500);
+
+    Serial.println("Fim Setup");
+    delay(2000);
 }
 
-void Carrinho::setup() {
-  Serial.begin(9600);
-  SerialBT.begin("Carrinho");
+Carrinho::Carrinho(int p1, int p2, int p3, int p4,/*.*/ int p5) {
+    pin1 = p1;
+    pin2 = p2;
+    pin3 = p3;
+    pin4 = p4;
+    LED = p5;//.
 
-
-  pinMode(pin1, OUTPUT);
-  pinMode(pin2, OUTPUT);
-  pinMode(pin3, OUTPUT);
-  pinMode(pin4, OUTPUT);
-  
-  Serial.println("Fim Setup");
-  delay(2000);
+    pinMode(pin1, OUTPUT);
+    pinMode(pin2, OUTPUT);
+    pinMode(pin3, OUTPUT);
+    pinMode(pin4, OUTPUT);
+    pinMode(LED, OUTPUT);//.
 }
 
-
-void Carrinho::motor_Esq(int i) {
-  switch (i){
-
-    case 1:
-      digitalWrite(pin1, HIGH);
-      digitalWrite(pin2, LOW);
-      break;
-
-    case 0:
-      digitalWrite(pin1, LOW);
-      digitalWrite(pin2, LOW);
-      break; 
-
-    case -1:
-      digitalWrite(pin1, LOW);
-      digitalWrite(pin2, HIGH);
-      break;
-
-    default:
-      break;
-  }
+void Carrinho::motor_Esq(int comando) {
+    switch (comando) {
+        case 1: 
+            digitalWrite(pin1, HIGH);
+            digitalWrite(pin2, LOW);
+            break;
+        case 0: 
+            digitalWrite(pin1, LOW);
+            digitalWrite(pin2, LOW);
+            break;
+        case -1: 
+            digitalWrite(pin1, LOW);
+            digitalWrite(pin2, HIGH);
+            break;
+    }
 }
 
-void Carrinho::motor_Dir(int i) {
-  switch (i){
-
-    case 1:
-      digitalWrite(pin3, HIGH);
-      digitalWrite(pin4, LOW);
-      break;
-
-    case 0:
-      digitalWrite(pin3, LOW);
-      digitalWrite(pin4, LOW);
-      break; 
-
-    case -1:
-      digitalWrite(pin3, LOW);
-      digitalWrite(pin4, HIGH);
-      break;
-
-    default:
-      break;
-  }
+void Carrinho::motor_Dir(int comando) {
+    switch (comando) {
+        case 1: 
+            digitalWrite(pin3, HIGH);
+            digitalWrite(pin4, LOW);
+            break;
+        case 0: 
+            digitalWrite(pin3, LOW);
+            digitalWrite(pin4, LOW);
+            break;
+        case -1: 
+            digitalWrite(pin3, LOW);
+            digitalWrite(pin4, HIGH);
+            break;
+    }
 }
-/*
-void Carrinho::mEsqFrente() {
-  digitalWrite(pin1, HIGH);
-  digitalWrite(pin2, LOW);
-}
-
-void Carrinho::mEsqPara() {
-  digitalWrite(pin1, LOW);
-  digitalWrite(pin2, LOW);
-}
-
-void Carrinho::mEsqTras() {
-  digitalWrite(pin1, LOW);
-  digitalWrite(pin2, HIGH);
-}
-
-void Carrinho::mDirFrente() {
-  digitalWrite(pin3, HIGH);
-  digitalWrite(pin4, LOW);
-}
-
-void Carrinho::mDirPara() {
-  digitalWrite(pin3, LOW);
-  digitalWrite(pin4, LOW);
-}
-
-void Carrinho::mDirTras() {
-  digitalWrite(pin3, LOW);
-  digitalWrite(pin4, HIGH);
-}
-*/
