@@ -6,8 +6,6 @@
 #define pin4 23 
 #define LED 4
 
-//nao deixar o define ser 0
-
 BluetoothSerial SerialBT;
 
 volatile char comando;
@@ -19,24 +17,12 @@ void setup() {
     inicializarSistema();
 }
 
-void Task1code(void * pvParameters) {
-    Serial.print("tarefa 1 rodando no core ");
+void movimentar(void * pvParameters) {
     Serial.println(xPortGetCoreID());
 
     for (;;) {
-        if (SerialBT.available()) {
-            if (xSemaphoreTake(xMutex, (TickType_t) 10) == pdTRUE) {
-                comando = SerialBT.read();
-
-                if (comando == 'M') {
-                    sinal_entre_nucleos = true;
-                } else if (comando == 'm') {
-                    sinal_entre_nucleos = false;
-                }
-
-                xSemaphoreGive(xMutex);
-            }
-        }
+        //NAO TESTADO
+        meuCarrinho.nucleosControle(PARAMETROS); // ta na biblioteca o define//PARAMETROS = SerialBT, comando, xMutex, sinal_entre_nucleos
 
         switch (comando) {
             case 'F': { //FRENTE
@@ -81,25 +67,16 @@ void Task1code(void * pvParameters) {
     }
 }
 
-void Task2code(void * pvParameters) {
-    Serial.print("tarefa 2 rodando no core: ");
-    Serial.println(xPortGetCoreID());
-
-    for (;;) {
-        if (xSemaphoreTake(xMutex, (TickType_t) 10) == pdTRUE) {
-            if (sinal_entre_nucleos) { 
-                //FORMA QUE VAI FICAR LIGADO ou PISCAR
-                digitalWrite(LED, HIGH);
-                delay(200);
-                digitalWrite(LED, LOW);
-                delay(200);
-            } else {
-                digitalWrite(LED, LOW);
-                delay(50);
-            }
-            xSemaphoreGive(xMutex);
-        }
-        vTaskDelay(100);
+//nao testado
+void piscarLED(bool sinal_entre_nucleos, int ledPin) {
+    if (sinal_entre_nucleos) { 
+        digitalWrite(ledPin, HIGH);
+        delay(200);
+        digitalWrite(ledPin, LOW);
+        delay(200);
+    } else {
+        digitalWrite(ledPin, LOW);
+        delay(50);
     }
 }
 
