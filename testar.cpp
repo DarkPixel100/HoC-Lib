@@ -20,7 +20,6 @@ void inicializarSistema() {
     delay(2000);
 }
 
-//nao testadis
 void Carrinho::executarPiscarLED(bool &sinal_entre_nucleos, int ledPin, SemaphoreHandle_t xMutex, void (*piscarLED)(bool, int)) {
     if (xSemaphoreTake(xMutex, (TickType_t)10) == pdTRUE) {
         piscarLED(sinal_entre_nucleos, ledPin);
@@ -36,7 +35,6 @@ Carrinho::Carrinho(int p1, int p2, int p3, int p4, int p5) {
     pin4 = p4;
     LED = p5;
 
-    //NN TESTADO
     if (pin1 == 0 || pin2 == 0 || pin3 == 0 || pin4 == 0 || LED == 0){
         Serial.println("OS PINOS NAO PODEM SER 0");
         while(1);
@@ -50,35 +48,31 @@ Carrinho::Carrinho(int p1, int p2, int p3, int p4, int p5) {
 }
 
 void Carrinho::motor_Esq(int comando) {
-    switch (comando) {
-        case 1: 
-            digitalWrite(pin1, HIGH);
-            digitalWrite(pin2, LOW);
-            break;
-        case 0: 
-            digitalWrite(pin1, LOW);
-            digitalWrite(pin2, LOW);
-            break;
-        case -1: 
-            digitalWrite(pin1, LOW);
-            digitalWrite(pin2, HIGH);
-            break;
+     if (comando == 1){
+        digitalWrite(pin1, HIGH);
+        digitalWrite(pin2, LOW);
+    }
+    if (comando == 0){
+        digitalWrite(pin1, LOW);
+        digitalWrite(pin2, LOW);
+    }
+    if (comando == -1){
+        digitalWrite(pin1, LOW);
+        digitalWrite(pin2, HIGH);
     }
 }
 
 void Carrinho::motor_Dir(int comando) {
-    switch (comando) {
-        case 1: 
-            digitalWrite(pin3, HIGH);
-            digitalWrite(pin4, LOW);
-            break;
-        case 0: 
-            digitalWrite(pin3, LOW);
-            digitalWrite(pin4, LOW);
-            break;
-        case -1: 
-            digitalWrite(pin3, LOW);
-            digitalWrite(pin4, HIGH);
-            break;
+     if (comando == 1){
+        digitalWrite(pin3, HIGH);
+        digitalWrite(pin4, LOW);
+    }
+    if (comando == 0){
+        digitalWrite(pin3, LOW);
+        digitalWrite(pin4, LOW);
+    }
+    if (comando == -1){
+        digitalWrite(pin3, LOW);
+        digitalWrite(pin4, HIGH);
     }
 }
