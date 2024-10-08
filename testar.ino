@@ -78,7 +78,6 @@ void loop() {
 
 /*FUNÇÃO QUE AS CRIANÇAS VAO RECEBER*/ 
 
-/*
 void movimentar(void * pvParameters) {
     Serial.println(xPortGetCoreID());
 
@@ -138,8 +137,15 @@ void piscarLED(bool ligar_LED, int ledPin) {
         delay(50);
     }
 }
-*/
 
 
+    /******************************/  
+    /*         ___________        */
+    /*        //  ||\ \   \       */
+    /*    ___//___||_\ \___\      */
+    /*   |  _            -_  |    */
+    /*   '-(_)--(_)--(_)--(_)-'   */
+    /*       VRUMMMMMMMMMMM       */
+    /******************************/
 
 
