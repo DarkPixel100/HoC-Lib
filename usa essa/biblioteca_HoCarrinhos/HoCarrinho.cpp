@@ -20,18 +20,23 @@ void inicializarSistema() {
     delay(2000);
 }
 
-Carrinho::Carrinho(int p1, int p2, int p3, int p4,/*.*/ int p5) {
+Carrinho::Carrinho(int p1, int p2, int p3, int p4, int p5) {
     pin1 = p1;
     pin2 = p2;
     pin3 = p3;
     pin4 = p4;
-    LED = p5;//.
+    LED = p5;
+
+    if (pin1 == 0 || pin2 == 0 || pin3 == 0 || pin4 == 0 || LED == 0){
+        Serial.println("OS PINOS NAO PODEM SER 0");
+        while(1);
+    }
 
     pinMode(pin1, OUTPUT);
     pinMode(pin2, OUTPUT);
     pinMode(pin3, OUTPUT);
     pinMode(pin4, OUTPUT);
-    pinMode(LED, OUTPUT);//.
+    pinMode(LED, OUTPUT);
 }
 
 void Carrinho::motor_Esq(int comando) {
