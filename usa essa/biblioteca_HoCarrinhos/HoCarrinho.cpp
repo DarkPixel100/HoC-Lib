@@ -20,14 +20,16 @@ void inicializarSistema() {
     delay(2000);
 }
 
-Carrinho::Carrinho(int p1, int p2, int p3, int p4, int p5) {
+Carrinho::Carrinho(int p1, int p2, int p3, int p4, int p5, int p6, int p7) {
     pin1 = p1;
     pin2 = p2;
     pin3 = p3;
     pin4 = p4;
     LED = p5;
+    LED_2 = p6;
+    FAROL = p7;
 
-    if (pin1 == 0 || pin2 == 0 || pin3 == 0 || pin4 == 0 || LED == 0){
+    if (pin1 == 0 || pin2 == 0 || pin3 == 0 || pin4 == 0 || LED == 0 || LED_2 == 0 || FAROL == 0) {
         Serial.println("OS PINOS NAO PODEM SER 0");
         while(1);
     }
@@ -37,6 +39,8 @@ Carrinho::Carrinho(int p1, int p2, int p3, int p4, int p5) {
     pinMode(pin3, OUTPUT);
     pinMode(pin4, OUTPUT);
     pinMode(LED, OUTPUT);
+    pinMode(LED_2, OUTPUT);
+    pinMode(FAROL, OUTPUT);
 }
 
 void Carrinho::motor_Esq(int comando) {

@@ -18,12 +18,12 @@ void Task2code(void *pvParameters);
 
 class Carrinho {
 public:
-    Carrinho(int p1, int p2, int p3, int p4, int p5);
+    Carrinho(int p1, int p2, int p3, int p4, int p5, int p6, int p7);
     void motor_Esq(int comando);
     void motor_Dir(int comando);
     
 private:
-    int pin1, pin2, pin3, pin4, LED;
+    int pin1, pin2, pin3, pin4, LED, LED_2, FAROL;
 };
 
 #endif
