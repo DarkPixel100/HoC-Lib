@@ -11,9 +11,9 @@ void inicializarSistema() {
 
     xMutex = xSemaphoreCreateMutex();
 
-    xTaskCreatePinnedToCore(Task1code, "task_movimento", 2048, NULL, 1, &task_movimento, 0);
+    xTaskCreatePinnedToCore(Nucleo_Movimento, "task_movimento", 2048, NULL, 1, &task_movimento, 0);
     delay(500);
-    xTaskCreatePinnedToCore(Task2code, "task_modulos", 2048, NULL, 1, &task_modulos, 1);
+    xTaskCreatePinnedToCore(Nucleo_Luzinha, "task_modulos", 2048, NULL, 1, &task_modulos, 1);
     delay(500);
 
     Serial.println("Fim Setup");

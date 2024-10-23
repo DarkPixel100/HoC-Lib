@@ -1,5 +1,8 @@
 #include "HoCarrinho.h"
 
+//ESSE ARQUIVO É O GABARITO DO CODIGO DO CARRINHO CARRINHO
+
+
 #define pin1 17   
 #define pin2 18 
 #define pin3 19 
@@ -43,29 +46,28 @@ void Nucleo_Movimento(void * pvParameters) {
         } 
 
         else if (comando == 'S') { //PARA
-            meuCarrinho.motor_Esq(/* insira -1, 0 ou 1 */);
-            meuCarrinho.motor_Dir(/* insira -1, 0 ou 1 */);
+            meuCarrinho.motor_Esq(0);
+            meuCarrinho.motor_Dir(0);
         } 
 
         else if (comando == 'B') { //RÉ
-            meuCarrinho.motor_Esq(/* -1, 0 ou 1 */);
-            meuCarrinho.motor_Dir(/* -1, 0 ou 1 */);
+            meuCarrinho.motor_Esq(-1);
+            meuCarrinho.motor_Dir(-1);
         } 
 
         else if (comando == 'R' || comando == 'E') { //FRETE DIREITA
-            meuCarrinho.motor_Esq(/* -1, 0 ou 1 */);
-            meuCarrinho.motor_Dir(/* -1, 0 ou 1 */);
-
+            meuCarrinho.motor_Esq(0);
+            meuCarrinho.motor_Dir(1);
         } 
 
         else if (comando == 'Q' || comando == 'L') { //FRENTE ESQUERDA
-            //escreva a função do motor esquerdo aqui
-            //escreva a função do motor direito aqui
+            meuCarrinho.motor_Esq(1);
+            meuCarrinho.motor_Dir(0);
         } 
 
         else if (comando == 'C') { //RÉ DIREITA
-            //escreva a função do motor esquerdo aqui
-            //escreva a função do motor direito aqui  
+            meuCarrinho.motor_Esq(0);
+            meuCarrinho.motor_Dir(-1);
         } 
 
         else if (comando == 'Z') {//RÉ ESQUERDA
@@ -91,9 +93,12 @@ void Nucleo_Piscar_Led(void * pvParameters) {
     while(1) {
         if (xSemaphoreTake(xMutex, (TickType_t) 10) == pdTRUE) {
             if (sinal_entre_nucleos) { 
-                /* ------------------------------------------------------------- */
-                /* Escreva aqui o código para que o LED e o LED_2 pisquem juntos */
-                /* ------------------------------------------------------------- */
+                digitalWrite(LED, HIGH);
+                digitalWrite(LED_2, LOW);
+                delay(200);
+                digitalWrite(LED, LOW);
+                digitalWrite(LED_2, HIGH);
+                delay(200);
             } 
             else {
                 digitalWrite(LED, LOW);

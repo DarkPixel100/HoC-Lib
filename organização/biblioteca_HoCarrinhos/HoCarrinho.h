@@ -13,8 +13,8 @@ extern volatile bool sinal_entre_nucleos;
 
  
 void inicializarSistema(); 
-void Task1code(void *pvParameters); 
-void Task2code(void *pvParameters);
+void Nucleo_Movimento(void *pvParameters); 
+void Nucleo_Luzinha(void *pvParameters);
 
 class Carrinho {
 public:

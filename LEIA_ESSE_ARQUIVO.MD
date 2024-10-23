@@ -1,4 +1,14 @@
 #
+# ONDE ESTÁ CADA COISA
+
+- A *BIBIOTECA* está na pasta organização e dentro dela tem a pasta biblioteca_HoCarrinhos, que é a apsta que deve ser zipada e inserida na IDE (abaixo esta como utilizar a biblioteca).
+
+- O código "gabarito" do carrinho está dentro da pasta organização
+
+- O código que será utilizada pelas crianças é o que está mais exposto na apsta principal do projeto. 
+
+
+#
 # COMO O CARRINHO FUNCIONA
 
 O carrinho funciona da seguinte forma: 
